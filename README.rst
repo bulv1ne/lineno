@@ -2,7 +2,6 @@
 lineno
 ======
 
-
 .. image:: https://img.shields.io/pypi/v/lineno.svg
         :target: https://pypi.python.org/pypi/lineno
 
@@ -10,24 +9,23 @@ lineno
         :target: https://travis-ci.org/bulv1ne/lineno
 
 
-Python Boilerplate contains all the boilerplate you need to create a Python package.
-
-
-* Free software: MIT license
-* Documentation: https://lineno.readthedocs.io.
+Outputs the lines from specified file
 
 
 Features
 --------
 
-* TODO
+.. code:: bash
 
-Credits
----------
+    $ lineno 1-3,15,16 README.rst
+    ======
+    lineno
+    ======
+    Features
+    --------
 
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+Usage in vim:
 
-.. _Cookiecutter: https://github.com/audreyr/cookiecutter
-.. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+.. code:: vim
 
-:r! lineno 2,6-18 README.rst
+    :r! lineno 1-3,15,16 README.rst
