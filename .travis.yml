@@ -1,13 +1,19 @@
 language: python
-python: 3.6
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+  - "3.7-dev"
+  - "nightly"
 cache: pip
 install:
-  - pip install -U flake8 coveralls tox
+  - pip install -U flake8
 script:
   - flake8
-  - tox
-after_success:
-  - coveralls
+  - python setup.py test
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
