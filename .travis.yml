@@ -1,0 +1,19 @@
+language: python
+python: 3.6
+cache: pip
+install:
+  - pip install -U flake8 coveralls tox
+script:
+  - flake8
+  - tox
+after_success:
+  - coveralls
+deploy:
+  provider: pypi
+  distributions: sdist bdist_wheel
+  user: Niels.Lemmens
+  password:
+    secure: XHxqrxVKRob45z+wTnQ1ErsnX1NngdnZRAV6ZLtv29S326lJ4lBlUSFx2FWCCAuLZuunvxfyO7/41LTboh9bCe6MET6aSggpMXiTgpMlTKB6mvNZgCUQF2UIgFDUPBoL7PUWa++Uc4PjRmZYvDwnmRDcIBgW1KymTIoGRaVnBXIZ7HYDWC210xtqfcJ2nr9uRKcKMye6mOnUUAfJmQKYsModZoDB8wdO18i0xRwkeLjK5SXuHfhNgWVx68+cOH5kMS0EcEcT9GDanlOnovReoNE+6sx+bXsiCXiD+D8JW03lt7dYjfJ/2VUer/Zmvd+LOQzSOlaixKiD33MH6p//9P/WeJcsVt/S/81Ys51oZo5a1jdo9uPaS6CgBhqZ7gC2/gbxY7iwFpdPgHakJv3dsIXLAfkc8GvdpbkrCgTjST+T5nhbpNEdxyJiAerFpW+MIMbqIzdxP606sZ4GYCJiUASwFFc0h5t284D69Snw+QzQBoVQLbO8RGO+dk+uxZKwPhiGvL2htkdIls4dd7vrgGS7SbBmPWa9FNGxDgR9Xccfh9X+WUJVrKHXAgf+23P19bFIE6GSE0vaPpCo6NeeDr+is8lquSvp2B1ky1EFsUnCr//Hu3NvZ43yEJnwbRZX6gyPTiqGVKGBvR/XT4ybbAmE1E+b+EOQalk0TC01Xww=
+  on:
+    tags: true
+    repo: bulv1ne/lineno
