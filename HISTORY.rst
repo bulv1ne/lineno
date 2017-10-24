@@ -2,8 +2,8 @@
 History
 =======
 
-Unreleased
-----------
+0.2.0 (2017-10-24)
+------------------
 
 * Add -l/--line-number argument instead of requiring that the line number sequence is the first argument.
 
