@@ -3,6 +3,7 @@
 import shutil
 import sys
 from argparse import ArgumentParser, ArgumentTypeError, FileType
+from itertools import chain
 
 if sys.version_info[0] == 3:
     from io import StringIO
@@ -49,11 +50,17 @@ def main(args=None, stdout=sys.stdout):
     parser = ArgumentParser(
         description='Outputs the lines from specified file'
     )
-    parser.add_argument('linenumbers', type=line_numbers)
+    parser.add_argument(
+        '-l', '--line-number', type=line_numbers, required=True,
+        action='append', metavar='line_number', dest='line_numbers'
+    )
     parser.add_argument('infile', type=FileType('r'), help='File to read from')
 
     args = parser.parse_args(args)
-    ranges = [Range(stdout, lnos) for lnos in args.linenumbers]
+    ranges = [
+        Range(stdout, lnos)
+        for lnos in chain.from_iterable(args.line_numbers)
+    ]
     with args.infile as infile:
         for current_lineno, line in enumerate(infile, start=1):
             for ri, r in enumerate(ranges[:]):

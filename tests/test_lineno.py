@@ -19,12 +19,22 @@ class TestLineno(unittest.TestCase):
 
     def test_single_line(self):
         out = StringIO()
-        cli.main(['2', TEST_FILE], stdout=out)
+        cli.main(['-l', '2', TEST_FILE], stdout=out)
         self.assertEqual(out.getvalue(), 'Second\n')
+
+    def test_file_first_arg(self):
+        out = StringIO()
+        cli.main([TEST_FILE, '-l', '2'], stdout=out)
+        self.assertEqual(out.getvalue(), 'Second\n')
+
+    def test_multi_line_args(self):
+        out = StringIO()
+        cli.main(['-l', '2', '-l', '2', TEST_FILE], stdout=out)
+        self.assertEqual(out.getvalue(), 'Second\nSecond\n')
 
     def test_multi_line(self):
         out = StringIO()
-        cli.main(['2-4', TEST_FILE], stdout=out)
+        cli.main(['-l', '2-4', TEST_FILE], stdout=out)
         expected = ''.join([
             'Second\n',
             'Third\n',
@@ -34,7 +44,7 @@ class TestLineno(unittest.TestCase):
 
     def test_multi_args(self):
         out = StringIO()
-        cli.main(['2,3-4,6-8', TEST_FILE], stdout=out)
+        cli.main(['-l', '2,3-4,6-8', TEST_FILE], stdout=out)
         expected = ''.join([
             'Second\n',
             'Third\n',
@@ -46,7 +56,7 @@ class TestLineno(unittest.TestCase):
         self.assertEqual(out.getvalue(), expected)
 
         out = StringIO()
-        cli.main(['2,2,1', TEST_FILE], stdout=out)
+        cli.main(['-l', '2,2,1', TEST_FILE], stdout=out)
         expected = ''.join([
             'Second\n',
             'Second\n',
@@ -56,7 +66,7 @@ class TestLineno(unittest.TestCase):
 
     def test_last_line(self):
         out = StringIO()
-        cli.main(['11,1', TEST_FILE], stdout=out)
+        cli.main(['-l', '11,1', TEST_FILE], stdout=out)
         expected = ''.join([
             'Last\n',
             'First\n',

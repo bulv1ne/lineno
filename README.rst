@@ -24,8 +24,15 @@ Features
     Features
     --------
 
+
+Usage in the shell:
+
+.. code:: sh
+
+    lineno -l 1-3,15,16 -l 28-32 README.rst
+
 Usage in vim:
 
 .. code:: vim
 
-    :r! lineno 1-3,15,16 README.rst
+    :r! lineno -l 1-3,15,16 -l 34-38 README.rst
