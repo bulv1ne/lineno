@@ -10,19 +10,19 @@ else:
     from cStringIO import StringIO
 
 
-def line_numbers(lnos):
-    l = []
-    for lno in map(lambda v: v.split('-'), lnos.split(',')):
+def line_numbers(arg):
+    lnos = []
+    for lno in map(lambda v: v.split('-'), arg.split(',')):
         try:
             if len(lno) == 1:
-                l.append((int(lno[0]), int(lno[0])))
+                lnos.append((int(lno[0]), int(lno[0])))
             else:
-                l.append((int(lno[0]), int(lno[1])))
-        except:
+                lnos.append((int(lno[0]), int(lno[1])))
+        except Exception:
             raise ArgumentTypeError(
                 'Could not parse %s as a line number' % lno
             )
-    return l
+    return lnos
 
 
 class Range:
