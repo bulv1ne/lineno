@@ -6,6 +6,7 @@ Unreleased
 ----------
 
 * Improve code readability
+* Add --version argument
 
 0.2.1 (2017-10-24)
 ------------------

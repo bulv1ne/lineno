@@ -5,6 +5,8 @@ import sys
 from argparse import ArgumentParser, ArgumentTypeError, FileType
 from itertools import chain
 
+from . import __version__
+
 if sys.version_info[0] == 3:
     from io import StringIO
 else:
@@ -60,6 +62,9 @@ def main(args=None, stdout=sys.stdout):
         action='append', metavar='line_number', dest='line_numbers'
     )
     parser.add_argument('infile', type=FileType('r'), help='File to read from')
+    parser.add_argument(
+        '--version', action='version', version='lineno %s' % __version__
+    )
 
     args = parser.parse_args(args)
     ranges = [
