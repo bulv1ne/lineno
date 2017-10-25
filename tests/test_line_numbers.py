@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 import argparse
-import os
-import sys
 import unittest
 
 from lineno.cli import line_numbers
