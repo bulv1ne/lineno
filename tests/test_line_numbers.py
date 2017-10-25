@@ -17,5 +17,4 @@ class TestLineNumbers(unittest.TestCase):
         self.assertEqual(line_numbers('1-2'), [(1, 2)])
 
     def test_invalid_line_number(self):
-        with self.assertRaises(argparse.ArgumentTypeError):
-            line_numbers('abc')
+        self.assertRaises(argparse.ArgumentTypeError, line_numbers, 'abc')
