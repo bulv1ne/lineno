@@ -5,6 +5,8 @@ History
 Unreleased
 ----------
 
+* Improve code readability
+
 0.2.1 (2017-10-24)
 ------------------
 

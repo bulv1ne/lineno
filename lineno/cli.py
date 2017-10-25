@@ -27,23 +27,28 @@ def line_numbers(arg):
 
 
 class Range:
+    __slots__ = ('out', 'range_begin', 'range_end', 'buffer',)
+
     def __init__(self, out, range_):
         self.out = out
-        self.range_ = range_
+        self.range_begin, self.range_end = range_
         self.buffer = StringIO()
 
-    def add(self, line, print_immediately):
+    def write(self, line, print_immediately):
         if print_immediately:
-            self.output()
+            self.flush()
             self.out.write(line)
         else:
             self.buffer.write(line)
 
-    def output(self):
+    def flush(self):
         if not self.buffer.closed:
             self.buffer.seek(0)
             shutil.copyfileobj(self.buffer, self.out)
             self.buffer.close()
+
+    def __contains__(self, other):
+        return self.range_begin <= other <= self.range_end
 
 
 def main(args=None, stdout=sys.stdout):
@@ -64,16 +69,16 @@ def main(args=None, stdout=sys.stdout):
     with args.infile as infile:
         for current_lineno, line in enumerate(infile, start=1):
             for ri, r in enumerate(ranges[:]):
-                if r.range_[0] <= current_lineno <= r.range_[1]:
-                    r.add(line, ri == 0)
-                if ri == 0 and r.range_[1] <= current_lineno:
-                    r.output()
+                if current_lineno in r:
+                    r.write(line, ri == 0)
+                if ri == 0 and r.range_end <= current_lineno:
+                    r.flush()
                     ranges.pop(0)
             if not ranges:
                 break
     # In case the file ended but we haven't output everything
     for r in ranges:
-        r.output()
+        r.flush()
 
 
 if __name__ == '__main__':
