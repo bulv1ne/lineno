@@ -15,21 +15,19 @@ else:
 
 def line_numbers(arg):
     lnos = []
-    for lno in map(lambda v: v.split('-'), arg.split(',')):
+    for lno in map(lambda v: v.split("-"), arg.split(",")):
         try:
             if len(lno) == 1:
                 lnos.append((int(lno[0]), int(lno[0])))
             else:
                 lnos.append((int(lno[0]), int(lno[1])))
         except Exception:
-            raise ArgumentTypeError(
-                'Could not parse %s as a line number' % lno
-            )
+            raise ArgumentTypeError("Could not parse %s as a line number" % lno)
     return lnos
 
 
 class Range:
-    __slots__ = ('out', 'range_begin', 'range_end', 'buffer',)
+    __slots__ = ("out", "range_begin", "range_end", "buffer")
 
     def __init__(self, out, range_):
         self.out = out
@@ -54,23 +52,23 @@ class Range:
 
 
 def main(args=None, stdout=sys.stdout):
-    parser = ArgumentParser(
-        description='Outputs the lines from specified file'
-    )
+    parser = ArgumentParser(description="Outputs the lines from specified file")
     parser.add_argument(
-        '-l', '--line-number', type=line_numbers, required=True,
-        action='append', metavar='line_number', dest='line_numbers'
+        "-l",
+        "--line-number",
+        type=line_numbers,
+        required=True,
+        action="append",
+        metavar="line_number",
+        dest="line_numbers",
     )
-    parser.add_argument('infile', type=FileType('r'), help='File to read from')
+    parser.add_argument("infile", type=FileType("r"), help="File to read from")
     parser.add_argument(
-        '--version', action='version', version='lineno %s' % __version__
+        "--version", action="version", version="lineno %s" % __version__
     )
 
     args = parser.parse_args(args)
-    ranges = [
-        Range(stdout, lnos)
-        for lnos in chain.from_iterable(args.line_numbers)
-    ]
+    ranges = [Range(stdout, lnos) for lnos in chain.from_iterable(args.line_numbers)]
     with args.infile as infile:
         for current_lineno, line in enumerate(infile, start=1):
             for ri, r in enumerate(ranges[:]):
@@ -86,5 +84,5 @@ def main(args=None, stdout=sys.stdout):
         r.flush()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
