@@ -7,6 +7,9 @@ Unreleased
 
 * Improve code readability
 * Add --version argument
+* Add `Black`_ to project
+* Add GitHub actions for testing
+* Remove travis-ci integration
 
 0.2.1 (2017-10-24)
 ------------------
@@ -22,3 +25,5 @@ Unreleased
 ------------------
 
 * First release on PyPI.
+
+.. _Black: https://github.com/ambv/black
