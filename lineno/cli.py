@@ -52,7 +52,9 @@ class Range:
 
 
 def main(args=None, stdout=sys.stdout):
-    parser = ArgumentParser(description="Outputs the lines from specified file")
+    parser = ArgumentParser(
+        prog="lineno", description="Outputs the lines from specified file"
+    )
     parser.add_argument(
         "-l",
         "--line-number",
