@@ -11,6 +11,7 @@ Unreleased
 * Add GitHub actions for testing
 * Remove travis-ci integration
 * Set prog in ArgumentParser to lineno
+* Fix lineno couldn't be executed as a package by calling `python -m lineno ...`
 
 0.2.1 (2017-10-24)
 ------------------
