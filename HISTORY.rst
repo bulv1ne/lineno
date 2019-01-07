@@ -5,6 +5,9 @@ History
 Unreleased
 ----------
 
+0.3.0 (2019-01-07)
+------------------
+
 * Improve code readability
 * Add --version argument
 * Add `Black`_ to project

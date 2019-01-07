@@ -9,7 +9,7 @@ with open("HISTORY.rst") as history_file:
 
 setup(
     name="lineno",
-    version="0.2.1",
+    version="0.3.0",
     description="",
     long_description=readme + "\n\n" + history,
     author="Niels Lemmens",
