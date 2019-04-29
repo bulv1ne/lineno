@@ -4,12 +4,10 @@ import sys
 import unittest
 from subprocess import check_output
 
-from lineno import cli
-
 if sys.version_info[0] == 3:
-    from io import StringIO
+    from io import StringIO  # noqa: F401
 else:
-    from cStringIO import StringIO
+    from cStringIO import StringIO  # noqa: F401
 
 
 TEST_DIR = os.path.dirname(os.path.realpath(__file__))
