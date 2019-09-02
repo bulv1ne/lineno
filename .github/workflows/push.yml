@@ -1,0 +1,35 @@
+on: push
+name: Test on push
+jobs:
+  build:
+    name: Python test 3.7
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Python test 3.7
+      uses: docker://python:3.7
+      with:
+        entrypoint: python
+        args: setup.py test
+    - name: Python test 3.6
+      uses: docker://python:3.6
+      with:
+        entrypoint: python
+        args: setup.py test
+    - name: Python test 3.5
+      uses: docker://python:3.5
+      with:
+        entrypoint: python
+        args: setup.py test
+    - name: Python test 2.7
+      uses: docker://python:2.7
+      with:
+        entrypoint: python
+        args: setup.py test
+    - name: Python test latest
+      uses: docker://python:latest
+      with:
+        entrypoint: python
+        args: setup.py test
+    - name: Check Python style
+      uses: bulv1ne/python-style-check@master
